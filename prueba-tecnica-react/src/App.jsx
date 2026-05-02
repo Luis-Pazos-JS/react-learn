@@ -1,36 +1,25 @@
-import { useEffect, useState } from "react";
+// @ts-nocheck
 import "./style.css";
-const URL_CAT_FACT = "https://catfact.ninja/fact";
-//const URL_FRISTWORLD_CAT = `https://cataas.com/cat/says/${fristWorld}?fontSize=50&fontColor=red`
+import { useCatUrl } from "./hooks/useCatUrl";
+import { useFactCat } from "./hooks/useRandomFact";
+
 export const App = () => {
-  const [fact, setFact] = useState("this is de fact on cat");
+  const [fact, updateFactCat] = useFactCat();
+  const [img] = useCatUrl({ fact });
 
-  useEffect(() => {
-    fetch(URL_CAT_FACT)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setFact(data.fact);
-        const fristWorld = data.fact.split(" ");
-        
-  }, []);
-
-    useEffect((fristWorld) => {
-
-      fetch(
-          `https://cataas.com/cat/says/${fristWorld}?fontSize=50&fontColor=red`,
-        )
-          .then((res) => res.json())
-          .then((res) => {});
-      });
-}, [fact]) 
+  const handleClick = () => {
+    updateFactCat();
+  };
 
   return (
     <main>
       <h1>App de prueba tecnica</h1>
-      <h2>check</h2>
-        <p>{fact}</p>
-        <img src="" alt="image cat descriptions fristworld fast"></img>
+      <h2>Fact On Cat</h2>
+      <button onClick={handleClick}>get fact</button>
+      {fact && <p>{fact}</p>}
+      {img && (
+        <img src={img} alt="image cat descriptions fristworld fast"></img>
+      )}
     </main>
   );
 };
