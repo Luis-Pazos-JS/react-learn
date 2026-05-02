@@ -1,0 +1,18 @@
+section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+header{
+  display: flex;
+  flex-direction: column;
+}
+form{
+  display: flex;
+  justify-content: center;
+}
+main{
+  display: flex;
+  justify-content: center;
+}
